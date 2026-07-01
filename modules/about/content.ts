@@ -124,6 +124,7 @@ export const LEADERSHIP = {
   directors: [
     {
       name: "Harsh Kumar",
+      image: "/team/harsh-kumar.jpg",
       title:
         "Director & Chief Executive Officer, Harcorp Industries Private Limited",
       bio: [
@@ -142,6 +143,7 @@ export const LEADERSHIP = {
     },
     {
       name: "Abhishek Kumar",
+      image: "/team/abhishek-kumar.jpg",
       title:
         "Director & Chief Operating Officer, Harcorp Industries Private Limited",
       bio: [

@@ -22,6 +22,7 @@ export const Navbar = () => {
     window.addEventListener("scroll", onScroll, { passive: true })
     return () => window.removeEventListener("scroll", onScroll)
   }, [])
+  const contactHref = pathname === "/about" ? "/about#contact" : "/#contact"
   const navItems = [
     {
       label: "Home",
@@ -42,7 +43,11 @@ export const Navbar = () => {
     {
       label: "News",
       href: "/news",
-    }
+    },
+    {
+      label: "Contact",
+      href: contactHref,
+    },
   ]
   const toggleMenu = () => {
     setIsOpen(!isOpen)
@@ -86,18 +91,23 @@ export const Navbar = () => {
             ))
           }
         </div>
-        <motion.div
-          initial={reduced ? false : { opacity: 0, scale: 0.95 }}
-          animate={reduced ? undefined : { opacity: 1, scale: 1 }}
-          transition={{ duration: 0.4, delay: 0.35, ease: EASE_OUT }}
-        >
-          <Button className="hidden md:block transition-transform duration-300 hover:scale-[1.02] active:scale-[0.98]">
-            Contact Us
+        <div className="flex items-center gap-2">
+          <motion.div
+            initial={reduced ? false : { opacity: 0, scale: 0.95 }}
+            animate={reduced ? undefined : { opacity: 1, scale: 1 }}
+            transition={{ duration: 0.4, delay: 0.35, ease: EASE_OUT }}
+          >
+            <Link href={contactHref} onClick={() => setIsOpen(false)}>
+              <Button className="transition-transform duration-300 hover:scale-[1.02] active:scale-[0.98] md:px-4">
+                <span className="hidden md:inline">Contact Us</span>
+                <span className="md:hidden">Contact</span>
+              </Button>
+            </Link>
+          </motion.div>
+          <Button className="md:hidden" onClick={toggleMenu} size="icon" variant="ghost">
+            {isOpen ? <X className="size-6 text-white" /> : <Menu className="size-6 text-white" />}
           </Button>
-        </motion.div>
-        <Button className="md:hidden" onClick={toggleMenu} size="icon" variant="ghost">
-          {isOpen ? <X className="size-6 text-white" /> : <Menu className="size-6 text-white" />}
-        </Button>
+        </div>
       </div>
 
       <Sheet open={isOpen} onOpenChange={setIsOpen}>
@@ -108,15 +118,22 @@ export const Navbar = () => {
           </SheetHeader>
           {
             navItems.map((item) => (
-              <Link href={item.href} key={item.href} className={cn("text-white/70 hover:text-white transition-colors font-medium pl-6", isActive(item.href) && "text-white")}>
+              <Link
+                href={item.href}
+                key={item.href}
+                className={cn("text-white/70 hover:text-white transition-colors font-medium pl-6", isActive(item.href) && "text-white")}
+                onClick={() => setIsOpen(false)}
+              >
                 {item.label}
               </Link>
             ))
           }
           <SheetFooter>
-            <Button className="w-full">
-              Contact Us
-            </Button>
+            <Link href={contactHref} className="w-full" onClick={() => setIsOpen(false)}>
+              <Button className="w-full">
+                Contact Us
+              </Button>
+            </Link>
           </SheetFooter>
         </SheetContent>
       </Sheet>

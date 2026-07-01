@@ -9,6 +9,10 @@ export const metadata: Metadata = {
   title: "Harcorp Industries — Artificial Super Intelligence & Matter",
   description:
     "Harcorp Industries is a research and development company focused on building artificial super intelligence and matter.",
+  icons: {
+    icon: "/favicon.svg",
+    apple: "/favicon.svg",
+  },
 };
 
 export default function RootLayout({

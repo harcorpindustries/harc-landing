@@ -1,3 +1,4 @@
+import { ContactSection } from "@/components/contact-section"
 import { AboutPreview } from "./about-preview"
 import { FocusAreas } from "./focus-areas"
 import { News } from "./news"
@@ -10,6 +11,7 @@ export const HomeConnectSection = () => {
       <Products />
       <FocusAreas />
       <News />
+      <ContactSection />
     </div>
   )
 }

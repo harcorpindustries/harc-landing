@@ -2,6 +2,7 @@
 
 import { type ReactNode, useRef } from "react"
 import Link from "next/link"
+import Image from "next/image"
 import { motion } from "framer-motion"
 import {
   ArrowRight,
@@ -22,6 +23,7 @@ import {
   Target,
 } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import { ContactSection } from "@/components/contact-section"
 import { SectionHeader } from "@/components/section-header"
 import { Reveal, Stagger, StaggerItem } from "@/components/motion/reveal"
 import { FadeInText, TextReveal } from "@/components/motion/text-reveal"
@@ -39,6 +41,7 @@ import {
   VISION,
   WHO_WE_ARE,
 } from "@/modules/about/content"
+import { CONTACT_MAILTO } from "@/modules/contact/content"
 
 const NEUTRAL_ACCENT = {
   icon: "text-zinc-300",
@@ -158,18 +161,22 @@ function SectionRule() {
   )
 }
 
-function DirectorMonogram({ name }: { name: string }) {
-  const initials = name
-    .split(" ")
-    .map((part) => part[0])
-    .join("")
-    .slice(0, 2)
-
+function DirectorPhoto({
+  name,
+  image,
+}: {
+  name: string
+  image: string
+}) {
   return (
-    <div className="relative flex size-14 shrink-0 items-center justify-center rounded-2xl border border-white/10 bg-linear-to-br from-white/12 to-white/2 shadow-[0_0_36px_-10px_rgba(255,255,255,0.25)]">
-      <span className="font-heading text-sm tracking-[0.18em] text-white/85">
-        {initials}
-      </span>
+    <div className="relative size-14 shrink-0 overflow-hidden rounded-2xl border border-white/10 bg-linear-to-br from-white/12 to-white/2 shadow-[0_0_36px_-10px_rgba(255,255,255,0.25)]">
+      <Image
+        src={image}
+        alt={name}
+        fill
+        sizes="56px"
+        className="object-cover"
+      />
       <span className="pointer-events-none absolute inset-0 rounded-2xl ring-1 ring-inset ring-white/10" />
     </div>
   )
@@ -224,7 +231,7 @@ export function AboutView() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.55, delay: 0.7, ease: [0.22, 1, 0.36, 1] }}
             >
-              <Link href="/#products" className="w-full sm:w-auto">
+              <Link href="/#projects" className="w-full sm:w-auto">
                 <Button
                   size="lg"
                   className="w-full cursor-pointer transition-transform duration-300 hover:scale-[1.02] active:scale-[0.98] sm:w-auto"
@@ -233,13 +240,15 @@ export function AboutView() {
                   <ArrowRight className="ml-2 size-4" />
                 </Button>
               </Link>
-              <Button
-                size="lg"
-                variant="outline"
-                className="w-full cursor-pointer border-white/20 text-white transition-transform duration-300 hover:scale-[1.02] hover:bg-white/10 active:scale-[0.98] sm:w-auto"
-              >
-                Contact Us
-              </Button>
+              <a href={CONTACT_MAILTO} className="w-full sm:w-auto">
+                <Button
+                  size="lg"
+                  variant="outline"
+                  className="w-full cursor-pointer border-white/20 text-white transition-transform duration-300 hover:scale-[1.02] hover:bg-white/10 active:scale-[0.98] sm:w-auto"
+                >
+                  Contact Us
+                </Button>
+              </a>
             </motion.div>
           </div>
 
@@ -612,7 +621,7 @@ export function AboutView() {
               <StaggerItem key={director.name}>
                 <SpotlightCard className="p-5 sm:p-8">
                   <div className="flex items-start gap-4 sm:gap-5">
-                    <DirectorMonogram name={director.name} />
+                    <DirectorPhoto name={director.name} image={director.image} />
                     <div className="min-w-0">
                       <h3 className="font-heading text-xl text-white">
                         {director.name}
@@ -750,6 +759,10 @@ export function AboutView() {
 
         <SectionRule />
 
+        <ContactSection variant="full" className="py-12 sm:py-16 lg:py-20" />
+
+        <SectionRule />
+
         {/* ── CTA ──────────────────────────────────────────────── */}
         <Reveal className="w-full py-12 sm:py-16 lg:py-20">
           <SpotlightCard
@@ -775,13 +788,15 @@ export function AboutView() {
                   <ArrowRight className="size-4" />
                 </Button>
               </Link>
-              <Button
-                size="lg"
-                variant="outline"
-                className="w-full cursor-pointer border-white/20 text-white transition-transform duration-300 hover:scale-[1.02] hover:bg-white/10 active:scale-[0.98] sm:w-auto"
-              >
-                Contact Us
-              </Button>
+              <a href={CONTACT_MAILTO} className="w-full sm:w-auto">
+                <Button
+                  size="lg"
+                  variant="outline"
+                  className="w-full cursor-pointer border-white/20 text-white transition-transform duration-300 hover:scale-[1.02] hover:bg-white/10 active:scale-[0.98] sm:w-auto"
+                >
+                  Contact Us
+                </Button>
+              </a>
               <Link
                 href="https://harcorp.ai"
                 target="_blank"

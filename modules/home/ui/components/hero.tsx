@@ -48,7 +48,7 @@ export const Hero = () => {
           animate={reduced ? undefined : { opacity: 1, y: 0 }}
           transition={{ duration: 0.55, delay: 0.72, ease: EASE_OUT }}
         >
-          <Link href="/about">
+          <Link href="https://harcorp.ai" target="_blank" rel="noopener noreferrer">
             <Button
               className="cursor-pointer transition-transform duration-300 hover:scale-[1.02] active:scale-[0.98]"
               size="lg"
